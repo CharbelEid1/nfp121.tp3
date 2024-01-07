@@ -3,11 +3,13 @@ package question1;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.lang.Object;
 
 public class IHMPile extends JFrame implements ActionListener{
     private JTextField donnee = new JTextField(6);
     private JTextField sommet = new JTextField(6);
     private JLabel     contenu = new JLabel("[]");
+
 
     private Pile p;
 
@@ -37,16 +39,24 @@ public class IHMPile extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent ae){
         if(ae.getActionCommand().equals("empiler")){
 
-            // à compléter
+            try {
+                  p.empiler(donnee.getText()); 
+                   contenu.setText(p.toString());
+                   donnee.setText("");
+                 } catch (PilePleineException e) {
+                   contenu.setText("La pile est pleine !"+p.toString());
+                  } catch (NumberFormatException nfe) {
+                  contenu.setText("La pile est vide !");
+                  }
+          }else{
 
-            // en cas d'exception
-            //contenu.setText( /* à compléter */"" + " estPleine !");
-
-        }else{
-
-            // à compléter
-            // en cas d'exception
-            //contenu.setText( /* à compléter */"" + " estVide !");
+                 try {
+                          sommet.setText(p.depiler().toString());
+                          contenu.setText(p.toString());
+                      } catch (PileVideException e) {
+                          contenu.setText("La pile estVide !");
+                  }
+          
         }
     }
 
